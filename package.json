@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/react-router-dom": "^5.3.3",
     "cra-template": "1.2.0",
+    "path-to-regexp": "^8.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-router-dom": "^5.3.4",
     "react-scripts": "5.0.1"
   },
   "scripts": {

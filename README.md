@@ -1,3 +1,3 @@
-# react-router-dom-6
+# react-router-dom-5
 
-编写react-router-dom-6 核心代码，了解react-router-dom-6 的用法
+了解react-router-dom-5 的用法, 理解react-router-dom-5 核心思想
