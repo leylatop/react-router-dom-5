@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script>
+    window.onpopstate = (event) => {
+      console.log({ state: event.state, pathname: window.location.pathname, type: 'popstate' })
+    }
+    window.onpushstate = (event) => {
+      console.log(event)
+    }
+
+    (function (history) {
+      const pushState = history.pushState;
+      history.pushState = (...args) => {
+      // history.pushState = function (state, title, pathname) {
+        if (typeof window.onpushstate === 'function') {
+          const [state, title, pathname] = args;
+          window.onpushstate({ state, pathname, type: 'pushstate' });
+        }
+        // 这里使用apply的原因是，需要保持原始的pushState的this指向，需要确定的this指向history
+        // 如果直接调用pushState，this指向window，this会丢失
+        // 使用args将所有参数都传递给pushState
+        return pushState.apply(history, args);
+      }
+    })(window.history);
+
+    setTimeout(() => {
+      history.pushState({ name: 'page1' }, 'title 1', '/page1');
+    }, 1000);
+
+    setTimeout(() => {
+      history.pushState({ name: 'page2' }, 'title 2', '/page2');
+    }, 2000);
+
+    setTimeout(() => {
+      history.pushState({ name: 'page3' }, 'title 3', '/page3');
+    }, 3000);
+
+    setTimeout(() => {
+      history.back();
+    }, 4000);
+
+    setTimeout(() => {
+      history.go(1)
+    }, 5000);
+  </script>
+</body>
+
+</html>
