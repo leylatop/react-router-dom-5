@@ -7,12 +7,18 @@ class Router extends React.Component {
     this.state = {
       location: props.history.location,
     };
+  }
 
+  componentDidMount() {
     // 监听到路由发生变化后，执行回调,否则手动更改路由不会更新界面。
     // listen方法是history仓库实现的
-    props.history.listen((location) => {
+    this.unlisten = this.props.history.listen((location) => {
       this.setState({ location })
     })
+  }
+
+  componentWillUnmount() {
+    this.unlisten && this.unlisten()
   }
 
   render() {

@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 
 export default class User extends Component {
   render() {
-    console.log(this.props);
-    
+    const  { history } = this.props
     return (
-      <div>User</div>
+      <div>
+        <p>User</p>
+        <button onClick={() => history.goBack() }>返回</button>
+      </div>
     )
   }
 }

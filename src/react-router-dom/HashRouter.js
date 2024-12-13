@@ -3,10 +3,12 @@ import { Router } from '../react-router';
 import { createHashHistory } from 'history';
 
 class HashRouter extends React.Component {
-  constructor(props) {
-    super(props);
-    this.history = createHashHistory();
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.history = createHashHistory();
+  // }
+
+  history = createHashHistory()
 
   render() {
     return <Router history={this.history}>
