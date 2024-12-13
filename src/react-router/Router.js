@@ -1,0 +1,30 @@
+import React from 'react';
+import RouterContext from './RouterContext';
+
+class Router extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      location: props.history.location,
+    };
+
+    // 监听到路由发生变化后，执行回调,否则手动更改路由不会更新界面。
+    // listen方法是history仓库实现的
+    props.history.listen((location) => {
+      this.setState({ location })
+    })
+  }
+
+  render() {
+    // location 也是history中的属性
+    const value = {
+      location: this.state.location,
+      history: this.props.history,
+    }
+    return <RouterContext.Provider value={value}>
+      {this.props.children}
+    </RouterContext.Provider>
+  }
+}
+
+export default Router;
