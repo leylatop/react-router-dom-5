@@ -2,6 +2,12 @@ import React from 'react';
 import RouterContext from './RouterContext';
 
 class Router extends React.Component {
+  static computeRootMatch(pathname) {
+    return {
+      path:'/', url: '/',params: {}, isExact: pathname === '/'
+    }
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -26,6 +32,7 @@ class Router extends React.Component {
     const value = {
       location: this.state.location,
       history: this.props.history,
+      match: Router.computeRootMatch(this.state.location.pathname) // 与route保持统一
     }
     return <RouterContext.Provider value={value}>
       {this.props.children}
