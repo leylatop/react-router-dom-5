@@ -4,7 +4,7 @@ import { pathToRegexp } from "path-to-regexp"
 function compilePath(path, options) {
   const keys = []
   const regexp = pathToRegexp(path, keys, options)
-  return regexp
+  return { keys, regexp }
 }
 
 /**
