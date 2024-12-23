@@ -1,38 +1,23 @@
 import React, { Component } from 'react'
+import { Link, Route } from '../react-router-dom'
+import UserList from './UserList'
+import UserAdd from './UserAdd'
+import UserDetail from './UserDetail'
 
 export default class User extends Component {
   render() {
-    const  { history } = this.props
     return (
       <div>
-        <p>User</p>
-        <button onClick={() => history.goBack() }>返回</button>
+        <ul>
+          <li><Link to="/user/list">UserList</Link></li>
+          <li><Link to="/user/add">UserAdd</Link></li>
+        </ul>
+        <div>
+          <Route path="/user/list" component={UserList}/>
+          <Route path="/user/add" component={UserAdd}/>
+          <Route path="/user/detail/:id" component={UserDetail}/>
+        </div>
       </div>
     )
   }
 }
-
-/**
-{
-  "history": {
-    "length": 8,
-    "action": "POP",
-    "location": {
-      "pathname": "/user",
-      "search": "",
-      "hash": ""
-    }
-  },
-  "location": {
-    "pathname": "/user",
-    "search": "",
-    "hash": ""
-  },
-  "match": {
-    "path": "/user",
-    "url": "/user",
-    "isExact": true,
-    "params": {}
-  }
-}
- */
