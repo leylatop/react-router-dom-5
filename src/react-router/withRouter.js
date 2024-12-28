@@ -2,7 +2,7 @@ import React from 'react'
 import RouterContext from "./RouterContext"
 
 function withRouter(OldComponent) {
-  return (props) => {
+  const NewComponent = (props) => {
     return (
       <RouterContext.Consumer>
       {
@@ -13,6 +13,7 @@ function withRouter(OldComponent) {
       </RouterContext.Consumer>
     )
   }
+  return NewComponent
 }
 
 export default withRouter
