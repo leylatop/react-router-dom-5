@@ -6,6 +6,7 @@ import User from './components/User';
 import Profile from './components/Profile';
 import Protected from './components/Protected';
 import Login from './components/Login';
+import NavHeader from './components/NavHeader';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const navLinkClassName='normal'
@@ -20,6 +21,7 @@ const navLinkActiveStyle = {
 root.render(
   <React.StrictMode>
     <Router>
+      <NavHeader title="导航"/>
       <ul>
         <li><NavLink className={navLinkClassName} style={navLinkStyle} activeClassName={navLinkActiveClassName} activeStyle={navLinkActiveStyle} to="/" exact>Home</NavLink></li>
         <li><NavLink className={navLinkClassName} style={navLinkStyle} activeClassName={navLinkActiveClassName} activeStyle={navLinkActiveStyle} to="/user">User</NavLink></li>
