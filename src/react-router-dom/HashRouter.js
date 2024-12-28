@@ -8,7 +8,7 @@ class HashRouter extends React.Component {
   //   this.history = createHashHistory();
   // }
 
-  history = createHashHistory()
+  history = createHashHistory(this.props)
 
   render() {
     return <Router history={this.history}>

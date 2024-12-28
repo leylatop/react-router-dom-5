@@ -3,7 +3,7 @@ import { Router } from '../react-router'
 import { createBrowserHistory } from '../history'
 
 class BrowserRouter extends React.Component {
-  history = createBrowserHistory()
+  history = createBrowserHistory(this.props)
 
   render() {
     return <Router history={this.history}>

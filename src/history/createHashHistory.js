@@ -1,9 +1,11 @@
-const createHashHistory = () => {
+const createHashHistory = (props) => {
   const historyStack = [] // 手动维护一个历史栈
   let current = -1 // 当前栈顶的指针
   let action = 'POP'
   let state
   let listeners = [] // 监听函数
+  let message
+  let confirm = props.getUserConfirmation ? props.getUserConfirmation : window.confirm
 
   function listen(listener) {
     listeners.push(listener)
@@ -46,6 +48,13 @@ const createHashHistory = () => {
       state = nextState
     }
 
+    if(message) {
+      let showMessage = message({ pathname })
+      let allow = confirm(showMessage)
+
+      if(!allow) return
+    }
+
     // 1. 在这里改变location的hash
     window.location.hash = pathname
 
@@ -68,6 +77,13 @@ const createHashHistory = () => {
   function goForward() {
     go(1)
   }
+
+  function block(messageFn) {
+    message = messageFn
+    return () => {
+      message = null
+    }
+  }
   const history = {
     action: 'POP', // 'POP' /'PUSH' /'REPLACE'
     go,
@@ -75,7 +91,8 @@ const createHashHistory = () => {
     goForward,
     push,
     listen,
-    location: { pathname: '/', state: undefined }
+    location: { pathname: '/', state: undefined },
+    block
   }
   // 处理初始值hash为空的情况
   if(window.location.hash) {

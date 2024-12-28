@@ -1,7 +1,10 @@
-function createBrowserHistory() {
+function createBrowserHistory(props) {
   const globalHistory = window.history
   let state
   let listeners = []
+  let message
+  let confirm = props.getUserConfirmation ? props.getUserConfirmation : window.confirm
+
   /**
    * 添加一个路由条目，并移动指针
    * @param {*} pathname 路径名
@@ -24,6 +27,12 @@ function createBrowserHistory() {
     globalHistory.pushState(state, null, pathname)
 
     const location = {pathname, state}
+    if(message) {
+      let showMessage = message({ pathname })
+      let allow = confirm(showMessage)
+
+      if(!allow) return
+    }
     notify({ action, location })
   }
 
@@ -66,6 +75,13 @@ function createBrowserHistory() {
     go(1)
   }
 
+  function block(messageFn) {
+    message = messageFn
+    return () => {
+      message = null
+    }
+  }
+
   const history = {
     action: 'POP', //'PUSH' / 'POP' /'REPLACE'
     push,
@@ -76,7 +92,8 @@ function createBrowserHistory() {
     },
     go,
     goBack,
-    goForward
+    goForward,
+    block
   }
   
   return history
