@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { HashRouter as Router, Route, Switch, Redirect, Link } from './react-router-dom';
+import { HashRouter as Router, Route, Switch, Redirect, Link, NavLink } from './react-router-dom';
 import Home from './components/Home';
 import User from './components/User';
 import Profile from './components/Profile';
@@ -8,13 +8,22 @@ import Protected from './components/Protected';
 import Login from './components/Login';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const navLinkClassName='normal'
+const navLinkStyle={
+  color: 'green'
+}
+const navLinkActiveClassName = 'strong'
+const navLinkActiveStyle = {
+  color: 'red'
+}
+
 root.render(
   <React.StrictMode>
     <Router>
       <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/user">User</Link></li>
-        <li><Link to="/profile">Profile</Link></li>
+        <li><NavLink className={navLinkClassName} style={navLinkStyle} activeClassName={navLinkActiveClassName} activeStyle={navLinkActiveStyle} to="/" exact>Home</NavLink></li>
+        <li><NavLink className={navLinkClassName} style={navLinkStyle} activeClassName={navLinkActiveClassName} activeStyle={navLinkActiveStyle} to="/user">User</NavLink></li>
+        <li><NavLink className={navLinkClassName} style={navLinkStyle} activeClassName={navLinkActiveClassName} activeStyle={navLinkActiveStyle} to="/profile">Profile</NavLink></li>
       </ul>
       <Switch>
         <Route path="/" exact component={Home} />

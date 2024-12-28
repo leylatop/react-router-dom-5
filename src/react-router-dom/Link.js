@@ -10,7 +10,7 @@ export default class Link extends Component {
       <RouterContext.Consumer>
         {
           (value) => {
-            return <a href={to} onClick={(e) => {
+            return <a {...this.props} onClick={(e) => {
               e.preventDefault()
               value.history.push(to)
             }}>{children}</a>
